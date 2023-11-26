@@ -17,7 +17,11 @@ export default {
         darkerGray: '#1A1B1D'
       },
       padding: {
+        13: '52px',
         27: '108px',
+      },
+      spacing: {
+        98: '392px'
       }
     },
     screens: {

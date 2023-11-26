@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Navigation from './components/Navigation';
 
 const App = (props) => {
   return (
-    <h1>test</h1>
+    <Navigation />
   );
 };
 
