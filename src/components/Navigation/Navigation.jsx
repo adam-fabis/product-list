@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Logo from '../assets/icons/logo.svg';
 import Logo from '/src/assets/icons/logo.svg';
 import Avatar from '/src/assets/images/avatar.jpg';
 import SearchLogo from '/src/assets/icons/search.svg';

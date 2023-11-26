@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Navigation from './components/Navigation';
+import Navigation from './components/Navigation/Navigation';
+import Products from './components/Products/Products';
+import { ProductsProvider } from './context/ProductContext';
+
 
 const App = (props) => {
   return (
-    <Navigation />
+    <>
+      <ProductsProvider>
+        <Navigation />
+        <Products />
+      </ProductsProvider>
+    </>
   );
 };
 

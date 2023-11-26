@@ -14,7 +14,8 @@ export default {
         lightGray: '#E0E2EA',
         lighterGray: '#E0E2EA',
         darkGray: '#9194A5',
-        darkerGray: '#1A1B1D'
+        darkerGray: '#1A1B1D',
+        bgGray: '#f8f8fa'
       },
       padding: {
         13: '52px',
