@@ -5,7 +5,27 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        Blue: '#2140E8',
+        lightBlue: '#4460F7',
+        Orange: '#F9A52B',
+        Gray: '#B9BDCF',
+        lightGray: '#E0E2EA',
+        lighterGray: '#E0E2EA',
+        darkGray: '#9194A5',
+        darkerGray: '#1A1B1D'
+      },
+      padding: {
+        27: '108px',
+      }
+    },
+    screens: {
+      'md': '767px',
+      'lg': '1023px',
+      'xl': '1365px',
+      '2xl': '1536px'
+    }
   },
   plugins: [],
 }
