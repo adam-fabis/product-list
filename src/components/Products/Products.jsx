@@ -4,7 +4,7 @@ import blankStar from '/src/assets/icons/blank-star.svg'
 import goldenStar from '/src/assets/icons/golden-star.svg'
 
 const Products = (props) => {
-  const { products, loading, currentPage, setCurrentPage } = useProducts();
+  const { productsItems, loading, currentPage, setCurrentPage } = useProducts();
 
   if (loading) {
     return <p>Brak danych produktów</p>; // TODO: dodać loadera
@@ -26,7 +26,7 @@ const Products = (props) => {
   return (
     <section className='bg-bgGray'>
       <div className='grid grid-cols-1 gap-6 container mx-auto px-6 pt-13 pb-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:px-27'>
-        {products.items.map(product => (
+        {productsItems.map(product => (
           <div key={product.id} className={`flex flex-col relative ${product.active ? 'grayscale pointer-events-none' : null}`}>
             {product.promo && !product.active ? <p className='absolute top-4 left-0 py-1 px-4 text-white bg-Orange'>Promo</p> : null}
             <img className='aspect-[288/170] object-cover rounded-t-md' src={product.image} alt="product" />

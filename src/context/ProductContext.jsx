@@ -3,7 +3,8 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
-    const [products, setProducts] = useState([]);
+    const [productsItems, setProductsItems] = useState([]);
+    const [productsMeta, setProductsMeta] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -15,7 +16,8 @@ const ProductsProvider = ({ children }) => {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setProducts(data);
+                setProductsItems(data.items);
+                setProductsMeta(data.meta);
             } catch (error) {
                 console.error('There was a problem fetching the data:', error);
             } finally {
@@ -23,19 +25,17 @@ const ProductsProvider = ({ children }) => {
             };
         };
         fetchProducts();
-        console.log(currentPage);
     }, [currentPage]);
-
     return (
-        <ProductsContext.Provider value={{ products, loading, currentPage, setCurrentPage }}>
+        <ProductsContext.Provider value={{ productsItems, productsMeta, loading, currentPage, setCurrentPage }}>
             {children}
         </ProductsContext.Provider>
     );
 };
 
 const useProducts = () => {
-    const { products, loading, currentPage, setCurrentPage } = useContext(ProductsContext);
-    return { products, loading, currentPage, setCurrentPage };
+    const { productsItems, productsMeta, loading, currentPage, setCurrentPage } = useContext(ProductsContext);
+    return { productsItems, productsMeta, loading, currentPage, setCurrentPage };
 };
 
 export { ProductsProvider, useProducts };
