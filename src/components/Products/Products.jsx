@@ -2,6 +2,7 @@ import React from 'react';
 import { useProducts } from '../../context/ProductContext';
 import blankStar from '/src/assets/icons/blank-star.svg'
 import goldenStar from '/src/assets/icons/golden-star.svg'
+import loader from '/src/assets/icons/loader.svg'
 import Pagination from '../Pagination/Pagination';
 
 
@@ -9,7 +10,11 @@ const Products = (props) => {
   const { productsItems, loading, currentPage, setCurrentPage } = useProducts();
 
   if (loading) {
-    return <p>Brak danych produktów</p>; // TODO: dodać loadera
+    return (
+      <div className='container flex pt-13 pb-8 justify-center'>
+        <img className='animate-spin' src={loader} alt='loader' />
+      </div>
+    )
   }
 
   const renderStars = (rating) => {
