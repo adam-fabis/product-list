@@ -2,6 +2,8 @@ import React from 'react';
 import { useProducts } from '../../context/ProductContext';
 import blankStar from '/src/assets/icons/blank-star.svg'
 import goldenStar from '/src/assets/icons/golden-star.svg'
+import Pagination from '../Pagination/Pagination';
+
 
 const Products = (props) => {
   const { productsItems, loading, currentPage, setCurrentPage } = useProducts();
@@ -51,9 +53,7 @@ const Products = (props) => {
           </div>
         ))}
       </div>
-      <button onClick={() => setCurrentPage(1)}>1</button>
-      <button onClick={() => setCurrentPage(2)}>2</button>
-      <button onClick={() => setCurrentPage(3)}>3</button>
+      <Pagination />
     </section>
   );
 };

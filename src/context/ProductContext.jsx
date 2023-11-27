@@ -7,11 +7,15 @@ const ProductsProvider = ({ children }) => {
     const [productsMeta, setProductsMeta] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
+    const [currentSearch, setCurrentSearch] = useState('');
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
+
         const fetchProducts = async () => {
+            console.log(productsMeta);
             try {
-                const response = await fetch(`http://jointshfrontendapi-env-3.eba-z7bd6rn6.eu-west-1.elasticbeanstalk.com/products?limit=8&page=${currentPage}`);
+                const response = await fetch(`${apiUrl}/products?limit=8&page=${currentPage}?search=${currentSearch}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -27,15 +31,15 @@ const ProductsProvider = ({ children }) => {
         fetchProducts();
     }, [currentPage]);
     return (
-        <ProductsContext.Provider value={{ productsItems, productsMeta, loading, currentPage, setCurrentPage }}>
+        <ProductsContext.Provider value={{ productsItems, productsMeta, loading, currentPage, setCurrentPage, currentSearch, }}>
             {children}
         </ProductsContext.Provider>
     );
 };
 
 const useProducts = () => {
-    const { productsItems, productsMeta, loading, currentPage, setCurrentPage } = useContext(ProductsContext);
-    return { productsItems, productsMeta, loading, currentPage, setCurrentPage };
+    const { productsItems, productsMeta, loading, currentPage, setCurrentPage, currentSearch } = useContext(ProductsContext);
+    return { productsItems, productsMeta, loading, currentPage, setCurrentPage, currentSearch };
 };
 
 export { ProductsProvider, useProducts };
