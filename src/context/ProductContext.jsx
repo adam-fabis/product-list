@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-
+const apiUrl = import.meta.env.VITE_API_URL;
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
@@ -9,21 +9,27 @@ const ProductsProvider = ({ children }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [currentSearch, setCurrentSearch] = useState('');
-    const [promo, setPromo] = useState('');
-    const [active, setActive] = useState('');
-    const apiUrl = import.meta.env.VITE_API_URL;
+    const [promo, setPromo] = useState(false);
+    const [active, setActive] = useState(false);
 
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
             try {
-                let queryUrl = `${apiUrl}/products?limit=8&page=${currentPage}&search=${currentSearch}`;
+                const params = new URLSearchParams({
+                    limit: 8,
+                    page: currentPage,
+                    search: currentSearch,
+                });
+
                 if (promo) {
-                    queryUrl += `&promo=${promo}`;
+                    params.append('promo', encodeURI(promo));
                 }
                 if (active) {
-                    queryUrl += `&active=${active}`;
+                    params.append('active', encodeURI(active));
                 }
+
+                const queryUrl = `${apiUrl}/products?${params.toString()}`;
                 const response = await fetch(queryUrl);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -41,10 +47,6 @@ const ProductsProvider = ({ children }) => {
 
         fetchProducts();
     }, [currentPage, currentSearch, promo, active, apiUrl]);
-
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [currentSearch, promo, active]);
 
     return (
         <ProductsContext.Provider value={{
