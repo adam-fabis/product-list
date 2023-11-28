@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Navigation from './components/Navigation/Navigation';
 import Products from './components/Products/Products';
 import { ProductsProvider } from './context/ProductContext';
 
 
-const App = (props) => {
+const App = () => {
   return (
     <>
       <ProductsProvider>
@@ -14,10 +13,6 @@ const App = (props) => {
       </ProductsProvider>
     </>
   );
-};
-
-App.propTypes = {
-
 };
 
 export default App;

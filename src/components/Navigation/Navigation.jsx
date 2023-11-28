@@ -23,11 +23,11 @@ const Navigation = (props) => {
   }, [inputValue, handleSearch]);
 
   const handlePromoChange = (event) => {
-    setPromo(event.target.checked ? 'true' : '');
+    setPromo(event.target.checked);
   };
 
   const handleActiveChange = (event) => {
-    setActive(event.target.checked ? 'false' : '');
+    setActive(event.target.checked);
   };
 
   return (
@@ -55,7 +55,7 @@ const Navigation = (props) => {
                 type="checkbox"
                 className="appearance-none w-6 h-6 border border-gray-500 rounded checked:bg-Blue"
                 onChange={handleActiveChange}
-                checked={active === 'false'}
+                checked={active}
               />
             </div>
             <div className='flex flex-row-reverse gap-1'>
@@ -65,7 +65,7 @@ const Navigation = (props) => {
                 type="checkbox"
                 className="appearance-none w-6 h-6 border border-gray-500 rounded checked:bg-Blue"
                 onChange={handlePromoChange}
-                checked={promo === 'true'}
+                checked={promo}
               />
             </div>
           </div>
