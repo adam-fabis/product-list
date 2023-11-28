@@ -3,6 +3,7 @@ import { useProducts } from '../../context/ProductContext';
 import loader from '/src/assets/icons/loader.svg'
 import Pagination from '../Pagination/Pagination';
 import Card from '../Card/Card';
+import EmptyList from '../EmptyList/EmptyList';
 
 
 const Products = (props) => {
@@ -33,7 +34,7 @@ const Products = (props) => {
               rating={product.rating} />
           ))
         ) : (
-          <p>brak wyników</p>
+          <EmptyList />
         )}
       </div>
       <Pagination />
