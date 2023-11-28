@@ -9,13 +9,22 @@ const ProductsProvider = ({ children }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [currentSearch, setCurrentSearch] = useState('');
+    const [promo, setPromo] = useState('');
+    const [active, setActive] = useState('');
     const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`${apiUrl}/products?limit=8&page=${currentPage}&search=${currentSearch}`);
+                let queryUrl = `${apiUrl}/products?limit=8&page=${currentPage}&search=${currentSearch}`;
+                if (promo) {
+                    queryUrl += `&promo=${promo}`;
+                }
+                if (active) {
+                    queryUrl += `&active=${active}`;
+                }
+                const response = await fetch(queryUrl);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -31,11 +40,11 @@ const ProductsProvider = ({ children }) => {
         };
 
         fetchProducts();
-    }, [currentPage, currentSearch, apiUrl]);
+    }, [currentPage, currentSearch, promo, active, apiUrl]);
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [currentSearch]);
+    }, [currentSearch, promo, active]);
 
     return (
         <ProductsContext.Provider value={{
@@ -46,7 +55,12 @@ const ProductsProvider = ({ children }) => {
             setCurrentPage,
             totalPages,
             currentSearch,
-            setCurrentSearch
+            setCurrentSearch,
+            promo,
+            setPromo,
+            active,
+            setActive
+
         }}>
             {children}
         </ProductsContext.Provider>
