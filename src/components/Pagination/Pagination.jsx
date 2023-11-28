@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { useProducts } from '../../context/ProductContext';
 
 const Pagination = (props) => {
-    const { productsMeta, setCurrentPage } = useProducts();
+    const { productsMeta, setCurrentPage, totalPages } = useProducts();
     const currentPage = productsMeta.currentPage;
-    const totalPages = productsMeta.totalPages;
     const pageNumbers = [];
 
     for (let i = 1; i <= totalPages; i++) {

@@ -7,6 +7,7 @@ const ProductsProvider = ({ children }) => {
     const [productsMeta, setProductsMeta] = useState({});
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
     const [currentSearch, setCurrentSearch] = useState('');
     const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -21,6 +22,7 @@ const ProductsProvider = ({ children }) => {
                 const data = await response.json();
                 setProductsItems(data.items);
                 setProductsMeta(data.meta);
+                setTotalPages(data.meta.totalPages);
             } catch (error) {
                 console.error('There was a problem fetching the data:', error);
             } finally {
@@ -31,6 +33,10 @@ const ProductsProvider = ({ children }) => {
         fetchProducts();
     }, [currentPage, currentSearch, apiUrl]);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [currentSearch]);
+
     return (
         <ProductsContext.Provider value={{
             productsItems,
@@ -38,6 +44,7 @@ const ProductsProvider = ({ children }) => {
             loading,
             currentPage,
             setCurrentPage,
+            totalPages,
             currentSearch,
             setCurrentSearch
         }}>
