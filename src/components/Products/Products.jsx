@@ -55,7 +55,7 @@ const Products = () => {
           <div className='relative'>
             <img className="aspect-[288/170] w-full object-cover rounded-t-md" src={selectedProduct.image} alt="product image" />
             <div className='p-6'>
-              <p>{selectedProduct.name}</p>
+              <p className='text-dark font-semibold text-lg pb-2'>{selectedProduct.name}</p>
               <p>{selectedProduct.description}</p>
             </div>
             <button className='absolute top-4 right-4' onClick={handleCloseModal}><img src={close} alt="Close button" /></button>
