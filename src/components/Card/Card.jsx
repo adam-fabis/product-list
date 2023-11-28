@@ -6,7 +6,6 @@ import { ratingHandler } from '../../helpers/ratingHandler';
 
 
 const Card = ({ id, promo, active, image, name, description, rating, onShowDetails }) => {
-    const product = { id, promo, active, image, name, description, rating };
     const getStars = () => {
         return ratingHandler(rating).map((star, index) => star ? <img key={`${id}${index}`} src={goldenStar} alt="Golden Star" /> : <img key={`${id}${index}`} src={blankStar} alt="Blank Star" />)
     }
@@ -28,11 +27,11 @@ const Card = ({ id, promo, active, image, name, description, rating, onShowDetai
                         {getStars()}
                     </div>
                     <button
-                        onClick={() => onShowDetails(product)}
+                        onClick={() => onShowDetails({id, image, name, description})}
                         className='bg-lightBlue py-[11px] rounded-md text-white font-semibold text-sm'
                         disabled={!active}
                     >
-                        Show details
+                        {active ? 'Show details' : 'Unavailable'}
                     </button>
                 </div>
             </div>
