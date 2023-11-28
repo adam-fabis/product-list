@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useProducts } from '../../context/ProductContext';
 
-const Pagination = (props) => {
+const Pagination = () => {
     const { productsMeta, setCurrentPage, totalPages } = useProducts();
     const currentPage = productsMeta.currentPage;
     const pageNumbers = [];
@@ -90,7 +89,5 @@ const Pagination = (props) => {
         </div>
     );
 };
-
-Pagination.propTypes = {};
 
 export default Pagination;

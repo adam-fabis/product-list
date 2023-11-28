@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import blankStar from '/src/assets/icons/blank-star.svg'
 import goldenStar from '/src/assets/icons/golden-star.svg'
 import { ratingHandler } from '../../helpers/ratingHandler';
@@ -37,6 +38,17 @@ const Card = ({ id, promo, active, image, name, description, rating, onShowDetai
             </div>
         </div>
     );
+};
+
+Card.propTypes = {
+    id: PropTypes.string.isRequired,
+    promo: PropTypes.bool.isRequired,
+    active: PropTypes.bool.isRequired,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    onShowDetails: PropTypes.func.isRequired,
 };
 
 export default Card;
